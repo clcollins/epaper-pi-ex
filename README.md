@@ -1,3 +1,5 @@
+# Pi Day Example ePaper Display and Countdown for Raspberry Pi
+
 ## Setup
 
 1. Enable SPI
@@ -69,3 +71,20 @@ $ git clone https://github.com/waveshare/e-Paper.git
 $ mkdir fonts
 $ curl -sSL https://github.com/google/fonts/raw/master/ofl/bangers/Bangers-Regular.ttf -o fonts/Bangers-Regular.ttf
 ```
+
+### Install the Systemd Service (optional)
+
+If you'd like for the countdown display to run whenever the system is turned on, and without you having to be logged in and running the script, you can install the optional systemd unit as a Systemd user service ([ArchWiki: Systemd User Service](https://wiki.archlinux.org/index.php/systemd/User)).
+
+Copy the provided piday.service file to ${HOME}/.config/systemd/user, creating the directory if it doesn't exist, and then you can enable the service and start it.
+
+<!-- markdownlint-disable MD014 -->
+```shell
+$ mkdir -p ~/.config/systemd/user
+$ cp piday.service ~/.config/systemd/user
+$ systemctl --user enable piday.service
+$ systemctl --user start piday.service
+```
+
+The script will output to the systemd Journal, and the output can be viewed with the `journalctl` command
+<!-- markdownlint-enable MD014 -->
