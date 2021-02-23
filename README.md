@@ -84,6 +84,10 @@ $ mkdir -p ~/.config/systemd/user
 $ cp piday.service ~/.config/systemd/user
 $ systemctl --user enable piday.service
 $ systemctl --user start piday.service
+
+# Enable lingering, to create a user session at boot
+# and allow services to run after logout
+$ loginctl enable-linger $USER
 ```
 
 The script will output to the systemd Journal, and the output can be viewed with the `journalctl` command
