@@ -1,0 +1,11 @@
+[Unit]
+Description=Pi Day Display
+
+[Service]
+Type=simple
+StandardOutput=journal
+ExecStart="%h/epaper-pi-ex/helloPi.py"
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target
