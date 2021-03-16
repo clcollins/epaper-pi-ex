@@ -158,6 +158,7 @@ Next is a small function that calculates the meat of our project: how long it is
 If it were, say, January, it would be relatively straightforward to count how many days are left, but we also need to take into account if Pi Day has already passed for the year (sadface), and if so, count how very, very many days are ahead of us until we can celebrate again:
 
 ```python
+ def countdown(now):
     piday = datetime(now.year, 3, 14)
 
     # Add a year if we're past PiDay
