@@ -158,18 +158,16 @@ Next is a small function that calculates the meat of our project: how long it is
 If it were, say, January, it would be relatively straightforward to count how many days are left, but we also need to take into account if Pi Day has already passed for the year (sadface), and if so, count how very, very many days are ahead of us until we can celebrate again:
 
 ```python
-def countdown(now):
     piday = datetime(now.year, 3, 14)
 
-    if piday > now:
-        days = (piday - now).days
-        return piday - now
-    elif piday < now:
-        piday = datetime(now.year + 1, 3, 14)
-        days = (piday - now).days
+    # Add a year if we're past PiDay
+    if piday < now:
+        piday = datetime((now.year + 1), 3, 14)
+
+    days = (piday - now).days
 
     logging.info(f"Days till piday: {days}")
-    return days
+    return day
 ```
 
 ### The Main function
@@ -295,10 +293,7 @@ If it actually _is_ Pi Day, we handle that too, with a little celebration messag
 ```python
     while (True):
         days = countdown(datetime.now())
-        count = days.days
-        unit = get_days_unit(count)
-
-        logging.info(days)
+        unit = get_days_unit(days)
 
         # Clear the bottom half of the screen by drawing a rectangle filld with white
         piday_draw.rectangle((0, 50, 250, 122), fill = 255)
@@ -306,12 +301,12 @@ If it actually _is_ Pi Day, we handle that too, with a little celebration messag
         # Draw the Header
         piday_draw.text((10,10), "Days till Pi-day:", font = bangers36, fill = 0)
 
-        if count == 0:
+        if days == 0:
             # Draw the Pi Day celebration text!
             piday_draw.text((0, 50), f"It's Pi Day!", font = bangers64, fill = 0)
         else:
             # Draw how many days until Pi Day
-            piday_draw.text((70, 50), f"{str(count)} {unit}", font = bangers64, fill = 0)
+            piday_draw.text((70, 50), f"{str(days)} {unit}", font = bangers64, fill = 0)
 
         # Render the screen
         epd.displayPartial(epd.getbuffer(piday_image))

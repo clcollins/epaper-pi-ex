@@ -24,12 +24,11 @@ def set_font_size(font_size):
 def countdown(now):
     piday = datetime(now.year, 3, 14)
 
-    if piday > now:
-        days = (piday - now).days
-        return piday - now
-    elif piday < now:
-        piday = datetime(now.year + 1, 3, 14)
-        days = (piday - now).days
+    # Add a year if we're past PiDay
+    if piday < now:
+        piday = datetime((now.year + 1), 3, 14)
+
+    days = (piday - now).days
 
     logging.info(f"Days till piday: {days}")
     return days
@@ -88,23 +87,20 @@ def main():
 
         while (True):
             days = countdown(datetime.now())
-            count = days.days
-            unit = get_days_unit(count)
+            unit = get_days_unit(days)
             
-            logging.info(days)
-
             # Clear the bottom half of the screen by drawing a rectangle filld with white
             piday_draw.rectangle((0, 50, 250, 122), fill = 255)
 
             # Draw the Header
             piday_draw.text((10,10), "Days till Pi-day:", font = bangers36, fill = 0)
 
-            if count == 0:
+            if days == 0:
                 # Draw the Pi Day celebration text!
                 piday_draw.text((0, 50), f"It's Pi Day!", font = bangers64, fill = 0)
             else:
                 # Draw how many days until Pi Day
-                piday_draw.text((70, 50), f"{str(count)} {unit}", font = bangers64, fill = 0)
+                piday_draw.text((70, 50), f"{str(days)} {unit}", font = bangers64, fill = 0)
 
             # Render the screen
             epd.displayPartial(epd.getbuffer(piday_image))
@@ -123,8 +119,8 @@ def main():
         exit()
 
 
-def get_days_unit(count):
-    if count == 1:
+def get_days_unit(days):
+    if days == 1:
         return "day"
     
     return "days"
