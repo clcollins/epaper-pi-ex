@@ -4,7 +4,7 @@ Description=Pi Day Display
 [Service]
 Type=simple
 StandardOutput=journal
-ExecStart="%h/epaper-pi-ex/helloPi.py"
+ExecStart="%h/epaper-pi-ex/countdown.py"
 KillSignal=SIGINT
 
 [Install]
