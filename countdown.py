@@ -100,7 +100,7 @@ def main():
                 piday_draw.text((0, 50), f"It's Pi Day!", font = bangers64, fill = 0)
             else:
                 # Draw how many days until Pi Day
-                piday_draw.text((70, 50), f"{str(days)} {unit}", font = bangers64, fill = 0)
+                piday_draw.text((00, 50), f"{str(days)} {unit}", font = bangers64, fill = 0)
 
             # Render the screen
             epd.displayPartial(epd.getbuffer(piday_image))
