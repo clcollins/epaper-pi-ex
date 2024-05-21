@@ -1,3 +1,5 @@
+#This repository is archived and will no longer receive updates.
+
 # Create a Pi Day countdown clock with a Raspberry Pi Zero W and an ePaper display
 
 [Pi Day](https://en.wikipedia.org/wiki/Pi_Day) has come and gone, leaving us with fond memories and [plenty of Raspberry Pi projects](#) (LINK TO PROJECTS) to try out.
